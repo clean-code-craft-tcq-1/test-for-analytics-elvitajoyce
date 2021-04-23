@@ -33,7 +33,6 @@ List the dependencies of the Analysis-functionality.
 5. Notification utility dependency
 6. Date and time library dependency
 
-(add more if needed)
 
 ### Mark the System Boundary
 
@@ -60,8 +59,6 @@ Add to these tests:
 4. Write number of trends with date and time to the PDF when the data is continuously increasing for 30mins
 5. Write "Server not found" to PDF when the server is not reachable
 6. Write "New report generated" when there is a new PDF report is available. 
-
-(add more)
 
 ### Recognize Fakes and Reality
 
