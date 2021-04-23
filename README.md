@@ -2,8 +2,6 @@
 
 Design tests for Analytics functionality on a Battery Monitoring System.
 
-Fill the parts marked '_enter' in the **Tasks** section below.
-
 ## Analysis-functionality to be tested
 
 This section lists the Analysis for which _tests_ must be written.
@@ -27,10 +25,12 @@ Notification must be sent when a new report is available.
 List the dependencies of the Analysis-functionality.
 
 1. Access to the Server containing the telemetrics in a csv file
-1. _enter dependency
-1. _enter dependency
+2. Read/write access of the data
+3. Threshold should be defined
+4. PDF report generator dependency
+5. Notification utility dependency
+6. Date and time library dependency
 
-(add more if needed)
 
 ### Mark the System Boundary
 
@@ -40,10 +40,10 @@ What is included in the software unit-test? What is not? Fill this table.
 |---------------------------|---------------|---
 Battery Data-accuracy       | No            | We do not test the accuracy of data
 Computation of maximum      | Yes           | This is part of the software being developed
-Off-the-shelf PDF converter | _enter Yes/No | _enter reasoning
-Counting the breaches       | _enter Yes/No | _enter reasoning
-Detecting trends            | _enter Yes/No | _enter reasoning
-Notification utility        | _enter Yes/No | _enter reasoning
+Off-the-shelf PDF converter | No 			| We need not test the pdf converter as it is a third party utility
+Counting the breaches       | Yes			| This is part of the software being developed. We should test if the number of breaches reported is as expected
+Detecting trends            | Yes			| This is part of the software being developed. We should test if the number of trends reported is as expected 
+Notification utility        | Yes			| This is part of the software being developed. We should test if the notification is sent once the new report is available
 
 ### List the Test Cases
 
@@ -52,11 +52,11 @@ Write tests in the form of `<expected output or action>` from `<input>` / when `
 Add to these tests:
 
 1. Write minimum and maximum to the PDF from a csv containing positive and negative readings
-1. Write "Invalid input" to the PDF when the csv doesn't contain expected data
-1. _enter a test
-1. _enter a test
-
-(add more)
+2. Write "Invalid input" to the PDF when the csv doesn't contain expected data
+3. Write the count of breaches to the pdf when the data crosses the threshold
+4. Write number of trends with date and time to the PDF when the data is continuously increasing for 30mins
+5. Write "Server not found" to PDF when the server is not reachable
+6. Write "New report generated" when there is a new PDF report is available. 
 
 ### Recognize Fakes and Reality
 
@@ -68,8 +68,8 @@ Enter one part that's real and another part that's faked/mocked.
 |--------------------------|--------------|-----------------------------|---
 Read input from server     | csv file     | internal data-structure     | Fake the server store
 Validate input             | csv data     | valid / invalid             | None - it's a pure function
-Notify report availability | _enter input | _enter output               | _enter fake or mock
-Report inaccessible server | _enter input | _enter output               | _enter fake or mock
-Find minimum and maximum   | _enter input | _enter output               | _enter fake or mock
-Detect trend               | _enter input | _enter output               | _enter fake or mock
-Write to PDF               | _enter input | _enter output               | _enter fake or mock
+Notify report availability | csv data	  | Notification success/failure| Fake the actual notifying utility
+Report inaccessible server | csv file 	  | server not found error		| Fake the server store
+Find minimum and maximum   | csv data 	  | min and max data     		| None - it's a pure function
+Detect trend               | csv data	  | Trends with date and time   | Mock increase of data for 30mins
+Write to PDF               | csv data	  | pdf data               		| Fake PDF utility 
